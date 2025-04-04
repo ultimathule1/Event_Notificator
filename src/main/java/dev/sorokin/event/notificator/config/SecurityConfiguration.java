@@ -41,6 +41,15 @@ public class SecurityConfiguration {
                                 .hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers(HttpMethod.POST, "/notifications")
                                 .hasAnyAuthority("ADMIN", "USER")
+
+                                .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico",
+                                        "/swagger-ui/**", "/v2/api-docs", "/v3/api-docs",
+                                        "/configuration/ui", "/swagger-resources/**",
+                                        "/configuration/security", "/swagger-ui.html",
+                                        "/webjars/**", "/v3/api-docs/swagger-config", "/openapi.yaml")
+                                .permitAll()
+
+                                .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthorizeFilter, AnonymousAuthenticationFilter.class)
                 .exceptionHandling(exception ->
@@ -58,23 +67,6 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.debug(true).ignoring()
-                .requestMatchers("/css/**",
-                        "/js/**",
-                        "/img/**",
-                        "/lib/**",
-                        "/favicon.ico",
-                        "/swagger-ui/**",
-                        "/v2/api-docs",
-                        "/v3/api-docs/**",
-                        "/configuration/ui",
-                        "/swagger-resources/**",
-                        "/configuration/security",
-                        "/swagger-ui.html",
-                        "/webjars/**",
-                        "/v3/api-docs/swagger-config",
-                        "/openapi.yaml",
-                        "/event-notificator-openapi.yaml"
-                );
+        return web -> web.debug(true);
     }
 }
