@@ -34,7 +34,7 @@ public class KafkaEventService {
         }
 
         if (subscribers.isEmpty()) {
-            LOGGER.info("The notification will not be save because does not have any subscribers");
+            LOGGER.warn("The notification will not be save because does not have any subscribers");
             return;
         }
 
