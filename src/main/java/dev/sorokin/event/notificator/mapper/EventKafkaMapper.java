@@ -16,6 +16,8 @@ public interface EventKafkaMapper {
     @Mapping(target = "maxPlacesNew", source = "fieldMaxPlaces", qualifiedByName = "extractNew")
     @Mapping(target = "dateOld", source = "fieldEventDate", qualifiedByName = "extractOld")
     @Mapping(target = "dateNew", source = "fieldEventDate", qualifiedByName = "extractNew")
+    @Mapping(target = "offsetDateOld", source = "fieldOffsetDate", qualifiedByName = "extractOld")
+    @Mapping(target = "offsetDateNew", source = "fieldOffsetDate", qualifiedByName = "extractNew")
     @Mapping(target = "costOld", source = "fieldEventCost", qualifiedByName = "extractOld")
     @Mapping(target = "costNew", source = "fieldEventCost", qualifiedByName = "extractNew")
     @Mapping(target = "durationOld", source = "fieldDuration", qualifiedByName = "extractOld")

@@ -150,7 +150,7 @@ public class EventFieldsService {
 
     public EventFieldsEntity findLatestUpdatedEventFields(Long id) {
         EventFieldsAuditEntity auditEntity = eventFieldsAuditRepository
-                .findLatestUpdatedAuditByEventFieldsId(id, OperationAuditType.UPDATE.getName())
+                .findFirstByEventFieldsIdAndTypeOperationOrderByDateDesc(id, OperationAuditType.UPDATE.getName())
                 .orElseThrow(() -> new EntityNotFoundException("Could not find audit entity with id: " + id));
 
         return new EventFieldsEntity(auditEntity);

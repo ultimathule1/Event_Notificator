@@ -14,12 +14,7 @@ import java.util.Optional;
 @Repository
 public interface EventFieldsAuditRepository extends JpaRepository<EventFieldsAuditEntity, Long> {
 
-    @Query("""
-            SELECT e FROM EventFieldsAuditEntity e
-            WHERE e.eventFieldsId = :eventFieldsId
-                AND e.typeOperation = :typeOperation
-            """)
-    Optional<EventFieldsAuditEntity> findLatestUpdatedAuditByEventFieldsId(Long eventFieldsId, String typeOperation);
+    Optional<EventFieldsAuditEntity> findFirstByEventFieldsIdAndTypeOperationOrderByDateDesc(Long eventFieldsId, String operation);
 
     void deleteByEventFieldsId(Long eventFieldsId);
 

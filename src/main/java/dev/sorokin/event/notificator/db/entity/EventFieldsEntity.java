@@ -1,6 +1,8 @@
 package dev.sorokin.event.notificator.db.entity;
 
+import dev.sorokin.event.notificator.db.converter.ZoneOffsetConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,9 +14,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 @Entity
 @Table(name = "event_fields")
@@ -34,6 +38,9 @@ public class EventFieldsEntity {
     private Integer maxPlaces;
     @Column(name = "date")
     private OffsetDateTime date;
+    @Convert(converter = ZoneOffsetConverter.class)
+    @Column(name = "offset_date")
+    private ZoneOffset offsetDate;
     @Column(name = "cost")
     private BigDecimal cost;
     @Column(name = "duration")
