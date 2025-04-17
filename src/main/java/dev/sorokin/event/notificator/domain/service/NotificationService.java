@@ -58,8 +58,8 @@ public class NotificationService {
                             .subscriberId(n.getSubscriberId())
                             .isRead(n.getIsRead())
                             .createdAt(n.getCreatedAt())
-                            .newFields(eventFieldsMapper.toDomain(eventFields))
-                            .oldFields(eventFieldsMapper.toDomain(n.getFieldsEntity()))
+                            .oldFields(eventFieldsMapper.toDomain(eventFields))
+                            .newFields(eventFieldsMapper.toDomain(n.getFieldsEntity()))
                             .build();
                 })
                 .toList();
