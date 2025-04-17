@@ -70,6 +70,9 @@ public class KafkaConfig {
         return new KafkaTemplate<>(producerFactory);
     }
 
+    /**
+     * This ProducerFactory sends messages that could not be processed to a separate dlt topic
+     */
     @Bean
     ProducerFactory<Long, Object> producerFactory() {
         Map<String, Object> props = new HashMap<>();

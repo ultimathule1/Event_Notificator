@@ -14,7 +14,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -54,6 +53,7 @@ public class EventFieldsEntity {
         this.name = auditEntity.getName();
         this.maxPlaces = auditEntity.getMaxPlaces();
         this.date = auditEntity.getDate();
+        this.offsetDate = auditEntity.getOffsetDate();
         this.cost = auditEntity.getCost();
         this.duration = auditEntity.getDuration();
         this.locationId = auditEntity.getLocationId();

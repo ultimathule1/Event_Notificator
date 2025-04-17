@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Service
@@ -36,6 +38,19 @@ public class NotificationService {
                 .map(n -> {
                     EventFieldsEntity eventFields =
                             eventFieldsService.findLatestUpdatedEventFields(n.getFieldsEntity().getId());
+
+                    if (eventFields != null) {
+                        eventFields.setDate(
+                                initializeCorrectDateWithOffset(eventFields.getDate(), eventFields.getOffsetDate())
+                        );
+                    }
+
+                    if (n.getFieldsEntity() != null) {
+                        n.getFieldsEntity().setDate(
+                                initializeCorrectDateWithOffset(n.getFieldsEntity().getDate(), n.getFieldsEntity().getOffsetDate())
+                        );
+                    }
+
                     return NotificationChangedEvent.builder()
                             .id(n.getId())
                             .eventId(n.getEventId())
@@ -67,5 +82,19 @@ public class NotificationService {
         }
 
         return Long.parseLong(auth.getName());
+    }
+
+    private OffsetDateTime initializeCorrectDateWithOffset(OffsetDateTime date, ZoneOffset offset) {
+
+        if (date == null) {
+            return date;
+        }
+
+        date = date.withOffsetSameInstant(ZoneOffset.UTC);
+        if (offset != null) {
+            return OffsetDateTime.of(date.toLocalDateTime().plusSeconds(offset.getTotalSeconds()), offset);
+        }
+
+        return date;
     }
 }

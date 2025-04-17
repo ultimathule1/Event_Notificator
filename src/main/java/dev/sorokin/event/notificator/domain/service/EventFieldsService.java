@@ -62,6 +62,7 @@ public class EventFieldsService {
 
         foundFieldsEntity.setName(eventFieldsEntity.getName());
         foundFieldsEntity.setDate(eventFieldsEntity.getDate());
+        foundFieldsEntity.setOffsetDate(eventFieldsEntity.getOffsetDate());
         foundFieldsEntity.setDuration(eventFieldsEntity.getDuration());
         foundFieldsEntity.setCost(eventFieldsEntity.getCost());
         foundFieldsEntity.setLocationId(eventFieldsEntity.getLocationId());
@@ -164,6 +165,7 @@ public class EventFieldsService {
         return EventFieldsAuditEntity.builder()
                 .eventFieldsId(fieldsEntity.getId())
                 .date(fieldsEntity.getDate())
+                .offsetDate(fieldsEntity.getOffsetDate())
                 .cost(fieldsEntity.getCost())
                 .locationId(fieldsEntity.getLocationId())
                 .duration(fieldsEntity.getDuration())
